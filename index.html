@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desde 16 de Maio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #e0f7ff, #f0faff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #1b3b5f;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timer-wrapper {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      margin: 20px auto;
+      max-width: 400px;
+    }
+
+    #timer {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      justify-items: center;
+    }
+
+    .time-box {
+      background-color: #d0eaff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      min-width: 100px;
+      color: #004080;
+    }
+
+    .image-stack {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 40px auto;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .image-stack img {
+      position: absolute;
+      top: 0;
+      width: 60vw;
+      max-width: 300px;
+      height: 80vw;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .main-image {
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    .side-left {
+      left: 50%;
+      transform: translateX(-190%);
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    .side-right {
+      left: 50%;
+      transform: translateX(90%);
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    .spotify-player-wrapper {
+      width: 100%;
+      max-width: 500px;
+      margin: 30px auto;
+    }
+
+    .spotify-player {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .romantic-message {
+      font-size: 1.5em;
+      color: #003366;
+      margin-top: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 500px) {
+      #timer {
+        grid-template-columns: 1fr;
+      }
+
+      .time-box {
+        min-width: auto;
+        width: 80%;
+      }
+
+      .romantic-message {
+        font-size: 1.2em;
+        padding: 0 10px;
+      }
+
+      .spotify-player iframe {
+        width: 100% !important;
+      }
+
+      .image-stack img {
+        width: 85vw;
+        height: 120vw;
+        max-width: none;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="spotify-player-wrapper fade-in">
+    <div class="spotify-player">
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2kfGoV9a5dbSKCNmUWH2ZF?utm_source=generator&theme=0" width="80%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <div class="timer-wrapper fade-in">
+    <div id="timer"></div>
+  </div>
+
+  <div class="image-stack fade-in">
+    <img id="img1" src="minha favortia.jpg" alt="Imagem 1" class="side-left">
+    <img id="img2" src="primeira foto.jpg" alt="Imagem 2" class="main-image">
+    <img id="img3" src="a melhor.jpg" alt="Imagem 3" class="side-right">
+  </div>
+
+  <div class="romantic-message fade-in">
+    Meu amor, fiz esse timer pra gente poder ver quando formos nos casar, ele conta desde o pedido de namoro porque achei que fosse uma data melhor para começarmos a contar de verdade. Enfim, queria te dizer e demonstrar o quanto eu te amo através desse site que eu fiz, podia ter comprado um que ficasse melhor, mais bonitinho e etc, mas achei que fazer um seria bem mais divertido e romântico kkkk, não ficou tão bom mas eu espero que goste, um beijão do seu namorado que te ama muito 😘❤️
+  </div>
+
+  <script>
+    const startDate = new Date('2025-05-16T00:00:00');
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const seconds = Math.floor(diff / 1000) % 60;
+      const minutes = Math.floor(diff / (1000 * 60)) % 60;
+      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const daysTotal = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const months = Math.floor(daysTotal / 30.44);
+      const days = Math.floor(daysTotal % 30.44);
+
+      document.getElementById('timer').innerHTML = `
+        <div class="time-box">${months} meses</div>
+        <div class="time-box">${days} dias</div>
+        <div class="time-box">${hours} horas</div>
+        <div class="time-box">${minutes} minutos</div>
+        <div class="time-box">${seconds} segundos</div>
+      `;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const images = [
+      document.getElementById('img1'),
+      document.getElementById('img2'),
+      document.getElementById('img3')
+    ];
+
+    let index = 0;
+    setInterval(() => {
+      images[index % 3].className = 'side-left';
+      images[(index + 1) % 3].className = 'main-image';
+      images[(index + 2) % 3].className = 'side-right';
+      index++;
+    }, 4000);
+  </script>
+</body>
+</html>
